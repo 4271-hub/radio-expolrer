@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radio Explorer</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+      background: #10151d;
+        color: white;
+          font-family: Arial, sans-serif;
+            text-align: center;
+            }
+
+            header {
+              padding: 25px;
+                background: #182331;
+                }
+
+                h1 {
+                  color: #48d6c6;
+                    margin: 0;
+                    }
+
+                    main {
+                      padding: 25px;
+                      }
+
+                      .radio {
+                        background: #1c2938;
+                          border-radius: 20px;
+                            padding: 25px;
+                              max-width: 400px;
+                                margin: 20px auto;
+                                }
+
+                                .frequency {
+                                  font-size: 42px;
+                                    color: #48d6c6;
+                                      margin: 20px;
+                                      }
+
+                                      select, button {
+                                        padding: 13px;
+                                          border: none;
+                                            border-radius: 10px;
+                                              margin: 6px;
+                                                font-size: 16px;
+                                                }
+
+                                                button {
+                                                  background: #48d6c6;
+                                                    color: #10151d;
+                                                      font-weight: bold;
+                                                      }
+
+                                                      button:active {
+                                                        transform: scale(.96);
+                                                        }
+
+                                                        input {
+                                                          width: 90%;
+                                                            padding: 12px;
+                                                              border-radius: 10px;
+                                                                border: none;
+                                                                  font-size: 18px;
+                                                                    text-align: center;
+                                                                    }
+
+                                                                    footer {
+                                                                      color: #9ba9b9;
+                                                                        padding: 20px;
+                                                                        }
+                                                                        </style>
+                                                                        </head>
+
+                                                                        <body>
+
+                                                                        <header>
+                                                                          <h1>📻 RADIO EXPLORER</h1>
+                                                                            <p>Explora las ondas del mundo</p>
+                                                                            </header>
+
+                                                                            <main>
+                                                                              <div class="radio">
+
+                                                                                  <h2>Receptor digital</h2>
+
+                                                                                      <select id="band" onchange="changeBand()">
+                                                                                            <option value="AM">AM</option>
+                                                                                                  <option value="FM">FM</option>
+                                                                                                        <option value="SW">SW</option>
+                                                                                                            </select>
+
+                                                                                                                <div class="frequency" id="display">
+                                                                                                                      9755 kHz
+                                                                                                                          </div>
+
+                                                                                                                              <input id="freq" type="number" value="9755">
+
+                                                                                                                                  <br><br>
+
+                                                                                                                                      <button onclick="adjust(-1)">−</button>
+                                                                                                                                          <button onclick="adjust(1)">+</button>
+
+                                                                                                                                              <br>
+
+                                                                                                                                                  <button onclick="tune()">Sintonizar</button>
+
+                                                                                                                                                      <p id="status">Receptor preparado</p>
+
+                                                                                                                                                        </div>
+                                                                                                                                                        </main>
+
+                                                                                                                                                        <footer>
+                                                                                                                                                          Radio Explorer © 2026
+                                                                                                                                                          </footer>
+
+                                                                                                                                                          <script>
+                                                                                                                                                          let band = "AM";
+
+                                                                                                                                                          function changeBand() {
+                                                                                                                                                            band = document.getElementById("band").value;
+
+                                                                                                                                                              let value = band === "SW" ? 9755 :
+                                                                                                                                                                            band === "FM" ? 99.5 : 1000;
+
+                                                                                                                                                                              document.getElementById("freq").value = value;
+                                                                                                                                                                                tune();
+                                                                                                                                                                                }
+
+                                                                                                                                                                                function tune() {
+                                                                                                                                                                                  let value = document.getElementById("freq").value;
+
+                                                                                                                                                                                    document.getElementById("display").textContent =
+                                                                                                                                                                                        value + (band === "SW" ? " kHz" : " MHz");
+
+                                                                                                                                                                                          document.getElementById("status").textContent =
+                                                                                                                                                                                              "Frecuencia seleccionada: " + value;
+                                                                                                                                                                                              }
+
+                                                                                                                                                                                              function adjust(direction) {
+                                                                                                                                                                                                let input = document.getElementById("freq");
+
+                                                                                                                                                                                                  let step = band === "SW" ? 5 :
+                                                                                                                                                                                                               band === "FM" ? 0.1 : 10;
+
+                                                                                                                                                                                                                 input.value = Number(input.value) + direction * step;
+                                                                                                                                                                                                                   tune();
+                                                                                                                                                                                                                   }
+                                                                                                                                                                                                                   </script>
+
+                                                                                                                                                                                                                   </body>
+                                                                                                                                                                                                                   </html>
+                                                                                                                                                                                                                   
